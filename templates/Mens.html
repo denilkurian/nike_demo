@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Men's</title>
+
+</head>
+<body>
+{% extends 'navbar.html' %}
+
+
+{% block content %}
+  <style>
+.no-border {
+  border: none;
+    }
+
+ .image-container {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+
+.image-container:hover {
+  opacity: .5;
+  transition: opacity 0.3s ease;
+
+}
+
+.select-wrapper {
+    font-size: 5px;
+  }
+
+.select-wrapper select {
+    width: 120px;
+    height :50px;/* Adjust the width as needed */
+     border: none;
+    outline: none;
+  }
+  select::-webkit-scrollbar {
+    width: 0;
+    height: 0;
+  }
+
+  /* Optional: Add any additional styling for the select element */
+  select {
+    overflow: hidden;
+  }
+
+
+  .dropbtn {
+  background-color: blue;
+  color: white;
+  padding: 5px;
+  font-size: 16px;
+  border: none;
+  cursor: pointer;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {background-color: #f1f1f1}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.dropdown:hover .dropbtn {
+  background-color: #3e8e41;
+}
+    </style>
+{% if user.is_authenticated %}
+<center>{{user}} <div class="dropdown">
+  <button class="btn btn-primary"><i class="bi bi-caret-down-fill"></i></button>
+  <div class="dropdown-content">
+  <a href="/register">Add User</a>
+  <a href="{% url 'logout' %}">Sign out</a>
+
+  </div>
+</div></center>
+{% else %}
+<center><a href="/login"><button class="btn btn-primary">Login</button></a>
+<a href="/register"> <button class="btn btn-light">Register</button></a>
+</center>
+{% endif %}
+<br>
+<div class="container">
+    <h4>Men's shoes</h4>
+    <br>
+
+    <button class="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavs"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <i class="bi bi-filter"></i>&nbsp;Filter
+    </button>
+
+      <div class="collapse navbar-collapse justify-content-center" id="navbarNavs"><br>
+          <div class="row">
+              <div class="col">
+                  <form action="{% url 'filter' %}" method="get" class="form-inline">
+                       Select Season: <button type="submit" title="Filter" class="btn btn-outline-dark">
+    <i class="bi bi-filter-square-fill"></i>
+  </button>
+          <h5>Catagories</h5>
+       <select name="f" id="cars"  class="form-control mr-sm-2" >
+    <option   value="Air Max">Air Max</option>
+    <option    value="Air Force">Air Force</option>
+    <option value="Air Vapormax">Air Vapormax</option>
+    <option  value="Air Jordan">Air Jordan</option>
+      <option  value="Kyrie">Kyrie</option>
+      <option  value="Lebron">Lebron</option>
+
+       </select></form>
+              </div>
+
+              <div class="col">
+                  <form action="{% url 'filter' %}" method="get" class="form-inline">
+                      <h5>Season</h5>
+                        Select Season: <button type="submit" title="Filter" class="btn btn-outline-dark">
+    <i class="bi bi-filter-square-fill"></i>
+  </button>
+                  <label  class="container">
+  <input name="f" value="Summer" type="checkbox" >
+  <span class="checkmark"></span>Summer
+</label>
+<label class="container">
+  <input name="f" value="Spring" type="checkbox">
+  <span class="checkmark"></span>Spring
+</label>
+<label class="container">
+  <input name="f" value="Autumn" type="checkbox">
+  <span class="checkmark"></span>Autumn
+</label>
+
+</form>
+
+      </div>
+
+
+              <div class="col">
+          <h5>Color</h5>
+     <form action="{% url 'filter' %}" method="get" class="form-inline">
+  <div class="form-group">
+    <label for="cars">Select Color:</label>
+       <button type="submit" title="Filter" class="btn btn-outline-dark">
+    <i class="bi bi-filter-square-fill"></i>
+  </button>
+
+  <div class="select-wrapper">
+  <select name="f" id="cars" class="form-control mr-sm-2" multiple>
+    <optgroup>
+      <option  class="btn btn-light" style="width:30px" value="White"></option>
+      <option class="btn btn-danger" style="color:#0b7dda" value="Red"></option>
+      <option class="btn btn-success" style="color:#0b7dda" value="Green"></option>
+
+    </optgroup>
+  </select>
+
+  <select name="f" id="cars" class="form-control mr-sm-2" multiple>
+    <optgroup >
+      <option class="btn btn-warning" style="color:#0b7dda" value="Yellow"></option>
+      <option class="btn btn-dark" style="color:#0b7dda" value="Dark"></option>
+      <option class="btn btn-primary" style="color:#0b7dda" value="Blue"></option>
+
+    </optgroup>
+  </select>
+</div>
+
+  </div>
+
+</form>
+
+
+       </div>
+
+
+
+          </div>
+    </div>
+
+
+    <br><br>
+<div class="row">
+{% for i in shoes %}
+    <div class="col">
+        <div class="card no-border" style="width:21rem">
+
+                <a href="{% url 'detailshoes' i.id %}"><img class="image-container" src="{{ i.main_image_url }}" alt="Main Image" ></a>
+            <div class="card-body">
+                <h5 style="font-family: Calibri Light;">{{i.name}}</h5>
+                € {{i.price}}</div>
+</div>
+
+        <br>
+        </div>
+
+{% endfor %}
+</div></div>
+{% include 'footer.html' %}
+{% endblock content %}
+
+
+</body>
+
+</html>

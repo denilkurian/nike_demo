@@ -1,0 +1,121 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nike_official</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9ndCyUaIbzAi2FUVXJi0CjmCapSmO7SnpJef0486qhLnuZ2cdeRhO02iuK6FUUVM" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.bundle.min.js"></script>
+
+    <style>
+  .navbar-nav .nav-link {
+    margin-right: 10px; /* Adjust the margin as needed */
+    margin-left: 10px; /* Adjust the margin as needed */
+  }
+
+  .navbar-nav .nav-link {
+    position: relative;
+    display: inline-block;
+    padding-bottom: 5px;
+  }
+
+  .navbar-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 1px;
+    background-color: black;
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navbar-nav .nav-link:hover::after {
+    transform: scaleX(1);
+  }
+</style>
+</head>
+<body>
+
+
+<nav class="navbar navbar-expand-lg p-4">
+  <div class="container">
+    <div class="d-flex align-items-start">
+
+      <img class="me-4" src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a6/Logo_NIKE.svg/1200px-Logo_NIKE.svg.png" width="48rem">
+      <a class="navbar-brand" href="index.html"><i class="fa-solid fa-code"></i></a>
+    </div>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+      aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-center" id="navbarNav">
+      <ul class="navbar-nav text-center">
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'listshoes'%}">Men</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#about">Women</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#works">Kids</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#works">Collections</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Contact</a>
+        </li>
+      </ul>
+    </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.13.0/themes/base/jquery-ui.css">
+  <script src="https://code.jquery.com/ui/1.13.0/jquery-ui.js"></script>
+
+
+   <form  action="{% url 'filter' %}" method="get" class="d-flex">
+  <button class="btn btn-outline-dark" type="submit"><i class="bi bi-search"></i></button>
+  <input name="f" id="search-input" class="form-control me-2" type="text" placeholder="Search" aria-label="Search">
+
+  <script>
+    $(function() {
+      $("#search-input").autocomplete({
+        source: function(request, response) {
+          $.getJSON("{% url 'autocomplete_shoes' %}", { term: request.term }, function(data) {
+            response(data);
+          });
+        },
+        minLength: 1
+      });
+    });
+  </script>
+</form>
+
+
+
+    <a class="nav-link" href="/cart">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<i title="Cart" style="font-size:25px" class="bi bi-bag"></i></a>
+    <ul class="navbar-nav">
+      <li class="nav-item" id="icon">
+        <a class="nav-link" href="#">
+          <i class="fas fa-moon" id="mode-icon"></i>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+
+
+{% block content %}
+
+{% endblock content %}
+</body>
+</html>

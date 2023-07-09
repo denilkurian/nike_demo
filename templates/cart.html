@@ -1,0 +1,66 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+
+</head>
+<body>
+
+{% extends 'navbar.html' %}
+{% load custom_filters %}
+
+{% block content %}
+<br>
+
+
+
+
+<center><h2 style="font-family:georgia">Shopping Cart&nbsp;&nbsp;<i class="bi bi-cart2"></i></h2><br>
+<a href="/listshoes"><button class="btn btn-light">Continue Shopping</button></a></center>
+
+
+<div class="row">
+    {% for cart_item in cart_items %}
+    <div class="col">
+        <div class="card no-border" style="width:40rem">
+            <div class="image"><img src="{{ cart_item.image_url }}" class="image-container"  width="100rem"  alt=""></div>
+<div class="card-body">
+                <h5 style="font-family: Calibri Light;">{{ cart_item.product }}</h5>
+                ₹ {{ cart_item.price }}/book
+    <p>Quantity :{{ cart_item.quantity }}</p>
+    <a href="{% url 'add_to_cart' cart_item.product.id %}"><i style="font-size:30px"  class="bi bi-plus-circle-fill"></i></a>
+<a href="{% url 'remove_from_cart' cart_item.id %}"><i style="font-size:30px" class="bi bi-dash-circle-fill"></i></a>
+    <br>
+    <div class="card-text"><p>Total Amount <b>₹ {{ cart_item.price|mul:cart_item.quantity }}</b></p></div>
+
+    <a href="{% url 'detailshoes' cart_item.product.id %}"><button class="btn btn-primary">View</button></a>
+
+<br><br>
+<form action="{% url 'remove_from_cart_all' cart_item.id %}" method="POST">
+            {% csrf_token %}
+            <button class="btn btn-dark" type="submit">Remove Item</button>
+        </form>
+
+</div>
+
+        </div>
+   <br>
+        </div>
+   {% empty %}
+     <center><img src="https://rukminim2.flixcart.com/www/800/800/promos/16/05/2019/08dddd59-c0ff-4efd-8723-6d847f5df25f.png?q=90" style="width:30%"></center>
+     <br>
+     <center>Oops Nothing Found</center>
+{% endfor %} <h3 style="color:red">&nbsp;&nbsp;Total: ₹  {{ total }}</h3>
+</div></div>
+<style>
+.row {
+  width: 90%; /* Adjust the width as needed */
+  margin-left: auto; /* Align the row to the center */
+  margin-right: auto;
+}
+</style>
+{% endblock content %}
+</body>
+</html>

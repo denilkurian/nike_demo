@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nike_Demo</title>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+  rel="stylesheet"
+/>
+
+</head>
+<body>
+
+{% extends 'navbar.html' %}
+
+{% block content %}
+<style>
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+}
+
+.logo-animation {
+ position: absolute;
+  left: 0;
+  animation: moveLogo 1s ease-in-out forwards;
+  opacity: 0;
+}
+
+@keyframes moveLogo {
+  0% {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateX(40%);
+  }
+}
+
+ @media (max-width: 768px) {
+      .logo-container {
+  display: none;
+
+        }
+    }
+
+</style>
+
+<br>
+
+<div class="container">
+<div class="row">
+    <div class="col">
+            <a href="/listshoes"><button title="Explore" class="btn btn-warning" onmouseover="document.getElementById('myImage').src='https://www.football-australia.com/media/catalog/product/cache/55906d0de32bffa1328dd5203261b370/n/i/nike_mercurial_superfly_viii_elite_fg_white_pink_multicolor_1.jpg'">Nike 33xx</button></a>
+
+    </div>
+     <div class="col">
+         <a href="/listshoes"> <button title="Explore"  class="btn btn-warning"  onmouseover="document.getElementById('myImage').src='https://www.mercurialfootball.com/7329-thickbox_default/nike-phantom-gt-elite-df-fg-soccer-shoes-blue-silver.jpg'">Nike 99 pulse</button></a>
+     </div>
+     <div class="col">
+         <a href="/listshoes">  <button title="Explore"  class="btn btn-warning" onmouseover="document.getElementById('myImage').src='https://www.ypsoccer.net/media/catalog/product/cache/1/image/9df78eab33525d08d6e5fb8d27136e95/a/5/a589ff68.jpg'">Nike new Thunder</button></a>
+    </div>
+</div></div>
+
+
+
+
+
+ <div class="row">
+ <div class="col">
+            <div class="logo-container">
+                <div class="logo-animation">
+                    <div style="font-size:200px;color:#848485;">
+    <span>N</span>
+    <span>I</span>
+    <span>K</span>
+    <span>E</span>
+      </div>
+  </div>
+</div></div>
+        <div class="col">
+
+<img id="myImage" src="https://www.mercurialfootball.com/7329-thickbox_default/nike-phantom-gt-elite-df-fg-soccer-shoes-blue-silver.jpg" width="590px">
+        </div></div>
+
+<script>
+function changeImageSource(newSource) {
+  var image = document.getElementById('myImage');
+  image.src = newSource;
+}
+</script>
+
+
+{% include 'footer.html' %}
+{% endblock content %}
+
+
+</body>
+</html>
+

@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Description</title>
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.4.0/mdb.min.css"
+  rel="stylesheet"
+/>
+
+
+</head>
+<body>
+{% extends 'navbar.html' %}
+{% block content %}
+<style>
+    .no-border {
+  border: none;
+    }
+    .custom-container {
+    margin-left: 290px;
+  }
+
+
+
+</style>
+
+
+
+<br><br>
+
+
+
+<div class="container custom-container">
+  <div class="row">
+    <div class="col-md-4">
+      <div class="card no-border" style="width: 25rem;">
+        <img class="image-container" src="{{ shoes.main_image_url }}" alt="Main Image">
+      </div>
+    </div>
+    <div style="width: 55rem;">
+
+    <div class="col-md-6">
+      <div>
+        <h4>{{ shoes.name }}</h4>
+      </div>
+      <div>
+        {{ shoes.description }}
+      </div>
+      <img class="image-container" src="{{ shoes.front_image }}" alt="Main Image" width="130rem">
+    <img class="image-container" src="{{ shoes.back_image }}" alt="Main Image" width="130rem">
+      <img class="image-container" src="{{ shoes.side_image }}" alt="Main Image" width="130rem">
+      <br><br><br>
+      <a href="{% url 'add_to_cart' shoes.id %}"><button class="btn btn-dark">Add to Cart</button></a> &nbsp; <button class="btn btn-light">&nbsp; € {{ shoes.price }}</button>
+    </div></div>
+  </div>
+</div>
+
+
+{% endblock content %}
+</body>
+</html>

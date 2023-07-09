@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Filtered results</title>
+</head>
+<body>
+{% extends 'navbar.html' %}
+
+{% block content %}
+<style>
+.no-border {
+  border: none;
+    }
+
+    .image-container:hover {
+  opacity: .5;
+  transition: opacity 0.3s ease;
+}
+ .image-container {
+    display: block;
+    max-width: 100%;
+    height: auto;
+  }
+</style>
+<br>
+<div class="container">
+<div class="row">
+{% for i in object_list %}
+    <div class="col">
+        <div class="card no-border" style="width:21rem">
+            <a href="{% url 'detailshoes' i.id %}"><img class="image-container" src="{{ i.main_image_url }}" alt="Main Image"></a>
+            <div class="card-body">
+                <h5 style="font-family: Calibri Light;">{{i.name}}</h5>
+                ${{i.price}}</div>
+</div>
+
+        <br>
+        </div>
+    {% empty %}
+    <br><br>
+    <center><img src="https://cdn.dribbble.com/users/3925584/screenshots/15796673/media/09e702c5c59ea914be62962d0180e1ae.gif" width="550rem"></center>
+<br>
+    <center><a href="/listshoes"><button class="btn btn-success">Keep searching</button></a> </center>
+{% endfor %}
+</div></div>
+
+{% endblock content %}
+</body>
+</html>
